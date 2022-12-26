@@ -16,7 +16,10 @@ const BootcampSchema = new mongoose.Schema({
 
   website: {
     type: String,
-    match: [/https?/, 'please use a valid URL with HPPTS or HTTP'],
+    match: [
+      /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/,
+      'please use a valid URL with HPPTS or HTTP',
+    ],
   },
   phone: {
     type: String,
@@ -24,7 +27,10 @@ const BootcampSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    match: [/https?/, 'please add a valid email'],
+    match: [
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+      'please add a valid email',
+    ],
   },
   address: {
     type: String,
@@ -35,7 +41,7 @@ const BootcampSchema = new mongoose.Schema({
     type: {
       type: String,
       enum: ['Point'],
-      required: true,
+      required: false,
     },
     coordinates: {
       type: [Number],
@@ -89,7 +95,7 @@ const BootcampSchema = new mongoose.Schema({
     default: false,
   },
   createdAt: {
-    type: Boolean,
+    type: Date,
     default: Date.now,
   },
 });
